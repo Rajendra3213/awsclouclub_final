@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Event{% endblock %}
+{% block content %}
+{% for message in messages %}
+  {% if message.tags == "error" %}
+    <div role="alert" class="alert alert-error mt-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 shrink-0 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ message }}</span>
+    </div>
+  {% endif %}
+{% endfor %}
+    <div class="container">
+        <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-transparent dark:bg-transparent antialiased">
+            <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+                <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                    <header class="mb-4 lg:mb-6 not-format">
+                        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ event.title }}</h1>
+                        <p>{{ event.description }}</p>
+                    </header>
+                    <div>{{event.detail|safe}}</div>
+                    <form method="post" class="mt-2" action="{% url 'event:EventDetail' event.id %}">
+                        {% csrf_token %}
+                        {% if not request.user.is_authenticated %}
+                        <br>
+                        <label for="participant_email" class="">Email</label>
+                        <input class="bg-gray-50 border border-2 w-full text-sm rounded-lg  block w-full form-control input mx-1 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none mt-2 " type="email" id="participant_email" name="participant_email" required>
+                        {% endif %}
+                        <button class="btn bg-purple-600 inline-flex items-center justify-center px-10 py-3 text-base font-extrabold text-center text-white rounded-lg hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 mt-4" type="submit">Participate</button>
+                    </form>
+                </article>
+            </div>
+          </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to right, #380D5C, #340533);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    position: relative;
+    margin-bottom:0px; /* Ensure no default margin is applied */
+    
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/assets/cloud_related/background1.svg');
+    background-repeat:repeat;
+    background-size: contain;
+    background-position: center;
+    pointer-events: none; /* Ensure the pseudo-element does not interfere with user interactions */
+    z-index: 0;
+    opacity:0.15 ;
+}
+
+.main-container {
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-top: 1%;
+}
+
+/* Desktop styling */
+@media (min-width: 1024px) {
+    body {
+        margin-left: 140px;
+        margin-right: 140px;
+    }
+
+    .main-container {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
+/* Mobile styling */
+@media (max-width: 1023px) {
+    body {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .main-container {
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+}
+
+@keyframes gradient-border {
+    0% {
+        border-color: #8629DA;
+    }
+
+    25% {
+        border-color: #ddbb11;
+    }
+
+    50% {
+        border-color: #1FA2FF;
+    }
+
+    75% {
+        border-color: #FFCC33;
+    }
+
+    100% {
+        border-color: #8629DA;
+    }
+}
+
+.gradient-border {
+    animation: gradient-border 8s linear infinite;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.navgradient {
+    background: linear-gradient(to right, #5b1a8f, #340533);
+}
+
+.responsive-img {
+    max-width: 100%; /* Ensure the image does not exceed the container's width */
+    height: auto;    /* Maintain the aspect ratio */
+    object-fit: contain; /* Ensure the image fits without being cropped */
+  }
+  
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 50; /* Sits above other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+  }
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 90%; /* Full width */
+    max-width: 640px; /* Limit max width */
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .responsive-iframe {
+    width: 100%;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  }
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  }

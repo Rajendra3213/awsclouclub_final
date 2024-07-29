@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}Events{% endblock %}
+{% block content %}
+{% for msg in messages %}
+<div role="alert" class="alert alert-success mt-4">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{msg}}</span>
+</div>
+{% endfor %}
+<br />
+<section class="py-16 border border-gray-100 lg:mx-15 md:mx-5">
+    <h2
+        class=" my-16  text-4xl font-bold tracking-tight leading-none text-center text-gray-900 md:text-4xl lg:text-4xl dark:text-white">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 animate-gradient-x">
+            Grand Event
+        </span>
+    </h2>
+    <div class="mx-auto max-w-screen-xl text-center lg:py-2 lg:px-12 p-4 lg:p-0">
+        {% if grand_event %}
+        <h1
+            class="mb-4 text-1xl font-extrabold tracking-tight leading-none text-gray-900 md:text-2 xl lg:text-3xl dark:text-white">
+            {{grand_event.title}}</h1>
+        <div class="px-3 ">
+            <p class="px-5 mx-5 text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                {{grand_event.description}}
+            </p>
+        </div>
+
+
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"></p>
+        <div class="flex justify-center">
+            <div id="countDown"
+                class="flex gap-8 text-center [&>*>h2]:text-xl [&>*>h2]:sm:text-4xl [&>*>h2]:font-bold [&>*>p]:text-sm [&>*>p]:font-semibold">
+                <div>
+                    <h2 id="month" class="text-emerald-600">{{ grand_event.startDate|date:"m" }}</h2>
+                    <p>Month</p>
+                </div>
+
+                <div>
+                    <h2 id="day">{{ grand_event.startDate|date:"d" }}</h2>
+                    <p>days</p>
+                </div>
+
+                <div>
+                    <h2 id="hour">{{ grand_event.startDate|date:"H" }}</h2>
+                    <p>Hours</p>
+                </div>
+                <div>
+                    <h2 id="minute">{{ grand_event.startDate|date:"i" }}</h2>
+                    <p>Minute</p>
+                </div>
+                <div>
+                    <h2 id="second">{{ grand_event.startDate|date:"s" }}</h2>
+                    <p>Second</p>
+                </div>
+            </div>
+            <p id="eventToday" class='mt-2 font-bold text-4xl'></p>
+        </div>
+        <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <a href="{% url 'event:GrandEvent' grand_event.id %}"
+                class="mt-10 border border-white sm:mx-5 justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Learn more </a>
+        </div>
+
+        {% else %}
+        <h1
+            class="mb-4 text-1xl font-extrabold tracking-tight leading-none text-gray-900 md:text-2 xl lg:text-3xl dark:text-white">
+            No Upcoming Events</h1>
+        {% endif %}
+    </div>
+
+</section>
+
+<aside aria-label="Related articles" class="py-8 lg:py-24 bg-transparent">
+    <div class="px-4 mx-auto max-w-screen-xl">
+        <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+            {% if events %}
+            {% for event in events %}
+            <article class="max-w-xs">
+                <a href="{% url 'event:EventDetail' event.id %}">
+                    <img src="{{event.image.url}}" class="mb-5 rounded-lg" alt="{{event.title}}">
+                </a>
+                <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <a href="{% url 'event:EventDetail' event.id %}">{{event.title}}</a>
+                </h2>
+                <p class="mb-4 text-gray-500 dark:text-gray-400">{{event.description|truncatechars:100}}</p>
+            </article>
+            {% endfor %}
+            {% else %}
+            <p class='mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white min-h-screen'>No upcoming
+                events</p>
+            {% endif %}
+        </div>
+    </div>
+</aside>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var countDownDate = {{grand_event.startDate|date:"U"}} * 1000;
+const monthsElement = document.getElementById('month');
+const daysElement = document.getElementById('day');
+const hoursElement = document.getElementById('hour');
+const minutesElement = document.getElementById('minute');
+const secondsElement = document.getElementById('second');
+var x = setInterval(function () {
+    let today = new Date().getTime();
+    let interval = countDownDate - today;
+    let months = Math.floor(interval / (1000 * 60 * 60 * 24 * 30.4375)); // Use 30.4375 days per month
+    let days = Math.floor(interval / (1000 * 60 * 60 * 24)) % 30.4375; // Use modulo to get the remaining days
+    let hours = Math.floor((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((interval % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((interval % (1000 * 60)) / 1000);
+    
+    monthsElement.innerHTML = Math.floor(months);
+    daysElement.innerHTML = Math.floor(days);
+    hoursElement.innerHTML = hours;
+    minutesElement.innerHTML = minutes;
+    secondsElement.innerHTML = seconds;
+    if (interval < 0) {
+        clearInterval(x);
+        document.getElementById("eventToday").innerHTML = "Event Happening Today!!!";
+        document.getElementById("countDown").style.display = "none";
+    }
+}, 1000);
+</script>
+{% endblock %}

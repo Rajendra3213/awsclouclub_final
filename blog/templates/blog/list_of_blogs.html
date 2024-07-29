@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Blogs{% endblock %}
+{% block content %}
+<aside aria-label="Related articles" class="py-8 lg:py-24 bg-transparent transition duration-150 ease-in-out">
+    <div class="px-4 mx-auto max-w-screen-xl">
+        <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+            {% if blogs %}
+            {% for blog in blogs %}
+            <article class="max-w-xs">
+                <a href="{% url 'blog:blogdetail' blog.id %}">
+                    <img src="{{blog.blog_image.url}}" class="mb-5 rounded-lg" alt="{{blog.title}}">
+                </a>
+                <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                    <a href="{% url 'blog:blogdetail' blog.id %}">{{blog.title}}</a>
+                </h2>
+                <p class="mb-4 text-gray-500 dark:text-gray-400">{{blog.summary}}</p>
+                <a href="{% url 'blog:blogdetail' blog.id %}" class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                    Read in {{blog.read_time}} minutes
+                </a>
+            </article>
+            {% endfor %}
+            {% else %}
+            <p class='mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white min-h-screen'>No blogs available</p>
+            {% endif %}
+        </div>
+    </div>
+  </aside>
+{% endblock %}

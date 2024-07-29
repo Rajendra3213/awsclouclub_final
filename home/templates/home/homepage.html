@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- main-section -->
+<section class="lg:py-16">
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div class="mr-auto place-self-center lg:col-span-7">
+            <h1
+                class="max-w-2xl mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-2xl xl:text-5xl dark:text-white">
+                AWS Cloud Club in Nepal</h1>
+            <h2
+                class="mb-4 text-1xl font-normal tracking-tight leading-none text-gray-900 md:text-1xl lg:text-2xl dark:text-white">
+                <span
+                    class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 animate-gradient-x">
+                    Where Clouds Code, Coffee Flows, and IT Geeks Roam Free!
+                </span>
+            </h2>
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                The AWS Cloud Club at Nepal introduces cloud computing, focusing on AWS, to Nepal&apos;s
+                education sector. It&apos;s a vibrant community of students exploring and innovating in cloud
+                technology, aiming to empower future Nepalese leaders with essential digital skills.</p>
+            <a href="/aboutus"
+                class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Explore more
+                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"></path>
+                </svg>
+            </a>
+            {% if not user.is_authenticated %}
+            <a href="/users/login"
+                class="inline-flex items-center justify-center px-5 py-3 text-base font-extrabold text-center text-white border border-gray-300 rounded-lg hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800  me-2 mb-2 ">
+                Subscribe us
+            </a>
+            {% endif %}
+        </div>
+        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <img src="{% static "assets/cloud_related/cloudman.png" %}" alt="mockup" class="responsive-img" />
+        </div>
+
+    </div>
+</section>
+
+<!-- student Community Day -->
+<section class="py-16 border border-gray-100 lg:mx-15 md:mx-5">
+    <h2
+        class=" my-16  text-4xl font-bold tracking-tight leading-none text-center text-gray-900 md:text-4xl lg:text-4xl dark:text-white">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 animate-gradient-x">
+            Grand Event
+        </span>
+    </h2>
+    <div class="mx-auto max-w-screen-xl text-center lg:py-2 lg:px-12 p-4 lg:p-0">
+        {% if grand_event %}
+        <h1
+            class="mb-4 text-1xl font-extrabold tracking-tight leading-none text-gray-900 md:text-2 xl lg:text-3xl dark:text-white">
+            {{grand_event.title}}</h1>
+        <div class="px-3 ">
+            <p class="px-5 mx-5 text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                {{grand_event.description}}
+            </p>
+        </div>
+
+
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"></p>
+        <div class="flex justify-center">
+            <div id="countDown"
+                class="flex gap-8 text-center [&>*>h2]:text-xl [&>*>h2]:sm:text-4xl [&>*>h2]:font-bold [&>*>p]:text-sm [&>*>p]:font-semibold">
+                <div>
+                    <h2 id="month" class="text-emerald-600">{{ grand_event.startDate|date:"m" }}</h2>
+                    <p>Month</p>
+                </div>
+
+                <div>
+                    <h2 id="day">{{ grand_event.startDate|date:"d" }}</h2>
+                    <p>days</p>
+                </div>
+
+                <div>
+                    <h2 id="hour">{{ grand_event.startDate|date:"H" }}</h2>
+                    <p>Hours</p>
+                </div>
+                <div>
+                    <h2 id="minute">{{ grand_event.startDate|date:"i" }}</h2>
+                    <p>Minute</p>
+                </div>
+                <div>
+                    <h2 id="second">{{ grand_event.startDate|date:"s" }}</h2>
+                    <p>Second</p>
+                </div>
+            </div>
+            <p id="eventToday" class='mt-2 font-bold text-4xl'></p>
+        </div>
+        <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <a href="{% url 'event:GrandEvent' grand_event.id %}"
+                class="mt-10 border border-white sm:mx-5 justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Learn more </a>
+        </div>
+
+        {% else %}
+        <h1
+            class="mb-4 text-1xl font-extrabold tracking-tight leading-none text-gray-900 md:text-2 xl lg:text-3xl dark:text-white">
+            No Upcoming Events</h1>
+        {% endif %}
+    </div>
+
+</section>
+
+<!-- event card -->
+<br>
+<h2
+    class=" my-16  text-4xl font-bold tracking-tight leading-none text-center text-gray-900 md:text-4xl lg:text-4xl dark:text-white">
+    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 animate-gradient-x">
+        Upcoming Events
+    </span>
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% if events %}
+    {% for event in events %}
+    <div
+        class="p-7 bg-transparent border border-gray-200 rounded-lg shadow dark:bg-transparent dark:border-gray-700 gradient-border cursor-pointer hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 transition-all duration-300 ease-in-out">
+        <img src="{{event.image.url}}" alt="{{event.title}}">
+        <a href="{% url 'event:EventDetail' event.id %}">
+            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white">{{event.title}}</h5>
+        </a>
+        <p class="mb-3 font-light text-gray-500 dark:text-white lg:mb-8 md:text-lg lg:text-xl">{{event.description|truncatechars:150}}
+        </p>
+        <a href="{% url 'event:EventDetail' event.id %}"
+                class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Explore more
+                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"></path>
+                </svg>
+            </a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class='text-2xl text-center'>No blogs available</p>
+    {% endif %}
+</div>
+
+<!-- Popular Blogs -->
+<br>
+<h2
+    class=" my-16  text-4xl font-bold tracking-tight leading-none text-center text-gray-900 md:text-4xl lg:text-4xl dark:text-white">
+    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 animate-gradient-x">
+        Popular Blogs
+    </span>
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% if blogs %}
+    {% for blog in blogs %}
+    <div
+        class="p-7 bg-transparent border border-gray-200 rounded-lg shadow dark:bg-transparent dark:border-gray-700 gradient-border cursor-pointer hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 transition-all duration-300 ease-in-out">
+        <img src="{{blog.blog_image.url}}" alt="{{blog.title}}">
+        <a href="{% url 'blog:blogdetail' blog.id %}">
+            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white">{{blog.title}}</h5>
+        </a>
+        <p class="mb-3 font-light text-gray-500 dark:text-white lg:mb-8 md:text-lg lg:text-xl">{{blog.summary|truncatechars:150}}
+        </p>
+        <a href="{% url 'blog:blogdetail' blog.id %}"
+                class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Explore more
+                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"></path>
+                </svg>
+            </a>
+    </div>
+    {% endfor %}
+    {% else %}
+        <p class='text-2xl text-center'>No blogs available</p>
+    {% endif %}
+
+
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    var countDownDate = {{grand_event.startDate|date:"U"}} * 1000;
+const monthsElement = document.getElementById('month');
+const daysElement = document.getElementById('day');
+const hoursElement = document.getElementById('hour');
+const minutesElement = document.getElementById('minute');
+const secondsElement = document.getElementById('second');
+var x = setInterval(function () {
+    let today = new Date().getTime();
+    let interval = countDownDate - today;
+    let months = Math.floor(interval / (1000 * 60 * 60 * 24 * 30.4375)); // Use 30.4375 days per month
+    let days = Math.floor(interval / (1000 * 60 * 60 * 24)) % 30.4375; // Use modulo to get the remaining days
+    let hours = Math.floor((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((interval % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((interval % (1000 * 60)) / 1000);
+    
+    monthsElement.innerHTML = Math.floor(months);
+    daysElement.innerHTML = Math.floor(days);
+    hoursElement.innerHTML = hours;
+    minutesElement.innerHTML = minutes;
+    secondsElement.innerHTML = seconds;
+    if (interval < 0) {
+        clearInterval(x);
+        document.getElementById("eventToday").innerHTML = "Event Happening Today!!!";
+        document.getElementById("countDown").style.display = "none";
+    }
+}, 1000);
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- navbar -->
+        {% include 'navbar.html' %}
+        {% block content %}{% endblock %}
+
+        <!-- footer -->
+        {% include 'footer.html' %}
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
