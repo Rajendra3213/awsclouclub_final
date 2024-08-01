@@ -112,7 +112,7 @@
 <h2
     class=" my-16  text-4xl font-bold tracking-tight leading-none text-center text-gray-900 md:text-4xl lg:text-4xl dark:text-white">
     <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 animate-gradient-x">
-        Upcoming Events
+    Events
     </span>
 </h2>
 
@@ -121,7 +121,7 @@
     {% for event in events %}
     <div
         class="p-7 bg-transparent border border-gray-200 rounded-lg shadow dark:bg-transparent dark:border-gray-700 gradient-border cursor-pointer hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 transition-all duration-300 ease-in-out">
-        <img src="{{event.image.url}}" alt="{{event.title}}">
+        <img class="mb-3" src="{{event.image.url}}" alt="{{event.title}}">
         <a href="{% url 'event:EventDetail' event.id %}">
             <h5 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white">{{event.title}}</h5>
         </a>
