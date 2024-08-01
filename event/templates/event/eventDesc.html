@@ -27,7 +27,7 @@
                         <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ event.title }}</h1>
                         <p>{{ event.description }}</p>
                     </header>
-                    <div>{{event.detail|safe}}</div>
+                    <div class="bg-transparent">{{event.detail|safe}}</div>
                     <form method="post" class="mt-2" action="{% url 'event:EventDetail' event.id %}">
                         {% csrf_token %}
                         {% if not request.user.is_authenticated %}

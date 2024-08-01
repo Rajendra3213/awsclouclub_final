@@ -28,13 +28,15 @@ except KeyError as e:
 DEBUG = False
 
 # Add to project/settings.py
-SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+#SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+
+SECURE_HSTS_SECONDS = 2_592_000
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
-ALLOWED_HOSTS = [".awscloudclubnepal.com"]
+ALLOWED_HOSTS = ["35.154.230.85","awscloudclubnepal.com"]
 
 
 # Application definition
@@ -69,7 +71,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
-SECURE_HSTS_SECONDS = 2_592_000
 
 ROOT_URLCONF = 'aws_core.urls'
 
@@ -84,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -132,24 +134,22 @@ TIME_ZONE = 'Asia/Kathmandu'
 USE_I18N = True
 
 USE_TZ = True
-
-
+APPEND_SLASH = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = "/var/www/staticfiles"
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static'),
-#]
-
+STATIC_URL = "/static/"
+# Note: Replace 'supersecure.codes' with your domain
+STATIC_ROOT = "/var/www/awscloudclubnepal.com/static"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 #media
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
+#MEDIA_ROOT= '/var/www/awscloudclubnepal.com/media'
 MEDIA_ROOT =BASE_DIR/'media'
 
 #custom user

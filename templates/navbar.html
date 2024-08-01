@@ -28,28 +28,28 @@
           <ul
             tabindex="0"
             class="menu menu-sm dropdown-content navgradient border border-white rounded-box z-[1] mt-3 w-52 p-2 shadow text-base">
-            <li><a href='/events' class="text-1xl">Event</a></li> 
-            <li><a href='/blogs' class="text-1xl">Blogs</a></li> 
-            <li><a href='/teams' class="text-1xl">Teams</a></li> 
-            <li><a href='/gallery' class="text-1xl">Gallery</a></li> 
-            <li><a href='/aboutus' class="text-1xl">About Us</a></li> 
+            <li><a href='/events/' class="text-1xl">Event</a></li> 
+            <li><a href='/blogs/' class="text-1xl">Blogs</a></li> 
+            <li><a href='/teams/' class="text-1xl">Teams</a></li> 
+            <li><a href='/gallery/' class="text-1xl">Gallery</a></li> 
+            <li><a href='/aboutus/' class="text-1xl">About Us</a></li> 
             {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
               <div class="flex items-center">
-                <a href='/admin'>
+                <a href='/admin/'>
                 <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Admin</button>
                 </a>
               </div>
               {% else %}
               <div class="flex items-center">
-                <a href='/users/logout'>
+                <a href='/users/logout/'>
                 <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Logout</button>
                 </a>
               </div>
               {% endif %}
           {% else %}
           <div class="flex items-center">
-            <a href='/users/login'>
+            <a href='/users/login/'>
             <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Login</button>
             </a>
           </div>
@@ -66,28 +66,28 @@
 
       <div class="flex-none gap-2 navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal gap-x-3 px-3 text-base">
-          <li><a href='/events'>Event</a></li> 
-          <li><a href='/blogs'>Blogs</a></li> 
-          <li><a href='/teams'>Teams</a></li> 
-          <li><a href='/gallery'>Gallery</a></li> 
-          <li><a href='/aboutus'>About Us</a></li>
+          <li><a href='/events/'>Event</a></li> 
+          <li><a href='/blogs/'>Blogs</a></li> 
+          <li><a href='/teams/'>Teams</a></li> 
+          <li><a href='/gallery/'>Gallery</a></li> 
+          <li><a href='/aboutus/'>About Us</a></li>
           {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
               <div class="flex items-center">
-                <a href='/admin'>
+                <a href='/admin/'>
                 <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Admin</button>
                 </a>
               </div>
               {% else %}
               <div class="flex items-center">
-                <a href='/users/logout'>
+                <a href='/users/logout/'>
                 <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Logout</button>
                 </a>
               </div>
               {% endif %}
           {% else %}
           <div class="flex items-center">
-            <a href='/users/login'>
+            <a href='/users/login/'>
             <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">Login</button>
             </a>
           </div>
